@@ -19,8 +19,8 @@ connectDB().catch(err => {
 app.get('/api/health', (req, res) => res.send('RAXXSLINK Server is OK'));
 app.use('/api', shortenRoute);
 
-// Redirect short code to original URL
-app.get('/:code', async (req, res) => {
+// Move redirection to the VERY BOTTOM and add regex for 6-char codes
+app.get('/:code([a-zA-Z0-9_-]{6})', async (req, res) => {
     try {
         let originalUrl = await resolveShortCode(req.params.code);
         if (!originalUrl) {
