@@ -1,10 +1,10 @@
 import crypto from 'crypto';
 import Url from '../models/Url.js';
 
-export async function createShortLink(originalUrl, baseUrl = 'http://localhost:3000') {
+export async function createShortLink(originalUrl, baseUrl = 'http://localhost:3000', ipAddress = 'unknown') {
   const shortCode = crypto.randomBytes(4).toString('base64url').slice(0, 6);
 
-  await Url.create({ shortCode, originalUrl });
+  await Url.create({ shortCode, originalUrl, ipAddress });
 
   return {
     shortUrl: `${baseUrl}/${shortCode}`,
