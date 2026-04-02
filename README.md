@@ -101,4 +101,4 @@ Proyek ini berada di bawah lisensi MIT.
 
 ---
 
-**Dibuat dengan ❤️ oleh [RAXXSLINK API](https://raxxslink.vercel.app/)**
+**Dibuat dengan ❤️ oleh [Kahfiiii](https://raxxslink.vercel.app/)**
