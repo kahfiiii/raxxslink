@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import shortenRoute from '../src/routes/shorten.js';
-import { resolveShortCode } from '../src/services/tinyurl.js';
-import { connectDB } from '../src/db.js';
+import shortenRoute from './src/routes/shorten.js';
+import { resolveShortCode } from './src/services/tinyurl.js';
+import { connectDB } from './src/db.js';
 
 dotenv.config();
 
