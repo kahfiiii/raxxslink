@@ -12,7 +12,9 @@ router.post('/shorten', async (req, res) => {
     }
 
     try {
-        const result = await createShortLink(url, `${req.protocol}://${req.get('host')}`);
+        const host = req.headers['x-forwarded-host'] || req.get('host');
+        // Use the current request host to build the short URL
+        const result = await createShortLink(url, `${req.protocol}://${host}`);
         res.json(result);
     } catch (err) {
         console.error('Shorten error:', err.message);
