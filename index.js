@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import path from 'path';
 import shortenRoute from './src/routes/shorten.js';
 import { resolveShortCode } from './src/services/tinyurl.js';
 import { connectDB } from './src/db.js';
@@ -9,12 +10,16 @@ dotenv.config();
 const app = express();
 app.set('trust proxy', true);
 app.use(express.json());
+app.use(express.static('.'));
 
 // Jalankan Koneksi DB
 connectDB().catch(err => {
     console.error('Initial DB Connection failed:', err.message);
 });
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'index.html'));
+});
 
 app.get('/api/health', (req, res) => res.send('RAXXSLINK Server is OK'));
 app.use('/api', shortenRoute);
