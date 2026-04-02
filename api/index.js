@@ -1,22 +1,22 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import shortenRoute from './src/routes/shorten.js';
-import { resolveShortCode } from './src/services/tinyurl.js';
-import { connectDB } from './src/db.js';
+import shortenRoute from '../src/routes/shorten.js';
+import { resolveShortCode } from '../src/services/tinyurl.js';
+import { connectDB } from '../src/db.js';
 
 dotenv.config();
 
 const app = express();
 app.set('trust proxy', true);
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static('../public'));
 
 // Jalankan Koneksi DB
 connectDB().catch(err => {
     console.error('Initial DB Connection failed:', err.message);
 });
 
-app.get('/', (req, res) => res.sendFile('index.html', { root: 'public' }));
+app.get('/', (req, res) => res.sendFile('index.html', { root: '../public' }));
 app.use('/api', shortenRoute);
 
 // Redirect short code to original URL
