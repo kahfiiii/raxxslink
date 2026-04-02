@@ -9,14 +9,13 @@ dotenv.config();
 const app = express();
 app.set('trust proxy', true);
 app.use(express.json());
-app.use(express.static('../public'));
 
 // Jalankan Koneksi DB
 connectDB().catch(err => {
     console.error('Initial DB Connection failed:', err.message);
 });
 
-app.get('/', (req, res) => res.sendFile('index.html', { root: '../public' }));
+
 app.get('/api/health', (req, res) => res.send('RAXXSLINK Server is OK'));
 app.use('/api', shortenRoute);
 
