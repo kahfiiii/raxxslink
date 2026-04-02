@@ -17,6 +17,7 @@ connectDB().catch(err => {
 });
 
 app.get('/', (req, res) => res.sendFile('index.html', { root: '../public' }));
+app.get('/api/health', (req, res) => res.send('RAXXSLINK Server is OK'));
 app.use('/api', shortenRoute);
 
 // Redirect short code to original URL
