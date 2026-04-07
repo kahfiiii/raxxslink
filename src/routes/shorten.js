@@ -1,11 +1,13 @@
 import express from 'express';
 import { createShortLink } from '../services/tinyurl.js';
 import Url from '../models/Url.js';
+import { connectDB } from '../db.js';
 
 const router = express.Router();
 
 router.post('/shorten', async (req, res) => {
     try {
+        await connectDB(); // Pastikan DB tersambung di serverless
         const { url } = req.body;
         const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
@@ -35,7 +37,7 @@ router.post('/shorten', async (req, res) => {
         res.json(result);
     } catch (err) {
         console.error('Shorten error:', err.message);
-        res.status(500).json({ error: 'Database issue. Please check Atlas IP Whitelist.' });
+        res.status(500).json({ error: `Server Error Detail: ${err.message}` });
     }
 });
 
